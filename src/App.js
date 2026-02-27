@@ -12,6 +12,11 @@ import Dashboard from "./pages/Dashboard";
 import Analytics from "./pages/Analytics";
 import AdminDashboard from "./pages/AdminDashboard";
 
+// IMPORT THE NEW PAGES
+import FeaturesPage from './pages/Features';
+import Pricing from './pages/Pricing';
+import Resources from './pages/Resources';
+
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem('token');
@@ -42,7 +47,6 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check if user is logged in
     const token = localStorage.getItem('token');
     const storedUser = localStorage.getItem('user');
     
@@ -64,7 +68,7 @@ function App() {
     <Router>
       <div className="min-h-screen bg-gray-50">
         <Routes>
-          {/* Public Routes */}
+          {/* Home Route */}
           <Route path="/" element={
             <>
               <Navbar user={user} setUser={setUser} />
@@ -76,6 +80,32 @@ function App() {
             </>
           } />
           
+          {/* NEW PAGES ROUTES */}
+          <Route path="/features" element={
+            <>
+              <Navbar user={user} setUser={setUser} />
+              <FeaturesPage />
+              <Footer />
+            </>
+          } />
+          
+          <Route path="/pricing" element={
+            <>
+              <Navbar user={user} setUser={setUser} />
+              <Pricing />
+              <Footer />
+            </>
+          } />
+          
+          <Route path="/resources" element={
+            <>
+              <Navbar user={user} setUser={setUser} />
+              <Resources />
+              <Footer />
+            </>
+          } />
+          
+          {/* Auth Routes */}
           <Route path="/login" element={
             user ? <Navigate to="/dashboard" /> : <Login setUser={setUser} />
           } />
